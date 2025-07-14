@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Healthify - Your Personalized Wellness Companion</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #e6f0fa, #f6f6f6);
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            transition: background 0.3s ease;
+        }
+
+        .navbar .logo {
+            font-size: 26px;
+            font-weight: 700;
+            color: #2c6e49;
+        }
+
+        .nav-links a {
+            color: #2c6e49;
+            text-decoration: none;
+            margin: 0 20px;
+            font-size: 16px;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #4a8e6a;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 60px 20px;
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+            animation: fadeIn 0.8s ease-in-out;
+        }
+
+        .hero h1 {
+            font-size: 36px;
+            color: #2c6e49;
+            margin-bottom: 15px;
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: #555;
+        }
+
+        .hero img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            margin-top: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .dashboard {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .card {
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        .card img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        .card h3 {
+            font-size: 20px;
+            color: #2c6e49;
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            font-size: 15px;
+            color: #666;
+        }
+
+        .track-form {
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            margin-top: 30px;
+            animation: slideIn 0.8s ease-in-out;
+        }
+
+        .track-form h2 {
+            font-size: 24px;
+            color: #2c6e49;
+            margin-bottom: 20px;
+        }
+
+        .track-form label {
+            display: block;
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        .track-form input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #d0d0d0;
+            border-radius: 8px;
+            background: #f9f9f9;
+            font-size: 16px;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .track-form input:focus {
+            outline: none;
+            border-color: #4a8e6a;
+            box-shadow: 0 0 8px rgba(74, 142, 106, 0.2);
+        }
+
+        .track-form button {
+            background: #2c6e49;
+            color: #fff;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.3s ease;
+        }
+
+        .track-form button:hover {
+            background: #4a8e6a;
+            transform: scale(1.03);
+        }
+
+        .tips-section {
+            margin-top: 30px;
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            animation: slideIn 0.8s ease-in-out;
+        }
+
+        .tips-section h2 {
+            font-size: 24px;
+            color: #2c6e49;
+            margin-bottom: 20px;
+        }
+
+        .tip {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .tip:hover {
+            transform: translateX(5px);
+        }
+
+        .tip img {
+            width: 50px;
+            height: 50px;
+            border-radius: 8px;
+            margin-right: 15px;
+            object-fit: cover;
+        }
+
+        .tip h4 {
+            font-size: 18px;
+            color: #333;
+        }
+
+        .tip p {
+            font-size: 15px;
+            color: #666;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            color: #2c6e49;
+            margin-top: 30px;
+            box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-15px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                gap: 12px;
+                padding: 12px 20px;
+            }
+
+            .nav-links a {
+                margin: 6px 0;
+                font-size: 14px;
+            }
+
+            .hero h1 {
+                font-size: 28px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .dashboard {
+                grid-template-columns: 1fr;
+            }
+
+            .card h3 {
+                font-size: 18px;
+            }
+
+            .card p {
+                font-size: 14px;
+            }
+
+            .track-form h2, .tips-section h2 {
+                font-size: 20px;
+            }
+
+            .track-form, .tips-section {
+                padding: 20px;
+            }
+
+            .tip img {
+                width: 40px;
+                height: 40px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero {
+                padding: 40px 15px;
+            }
+
+            .hero h1 {
+                font-size: 24px;
+            }
+
+            .hero p {
+                font-size: 14px;
+            }
+
+            .card {
+                padding: 15px;
+            }
+
+            .track-form input, .track-form button {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div class="logo">Healthify</div>
+        <div class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#track">Track Health</a>
+            <a href="#consult">Consult Doctor</a>
+            <a href="#tips">Health Tips</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="hero" id="home">
+            <h1>Welcome to Healthify</h1>
+            <p>Your personalized wellness companion for managing cholesterol, weight, and overall health.</p>
+            <img src="placeholder-hero.jpg" alt="Healthy lifestyle illustration" width="600">
+        </div>
+
+        <div class="dashboard">
+            <div class="card">
+                <img src="placeholder-cholesterol.jpg" alt="Cholesterol tracking illustration" width="260">
+                <h3>Cholesterol Control</h3>
+                <p>Track and manage your cholesterol levels with personalized tips and insights.</p>
+            </div>
+            <div class="card">
+                <img src="placeholder-weight.jpg" alt="Weight management illustration" width="260">
+                <h3>Weight Support</h3>
+                <p>Set weight goals, track progress, and get motivated with tailored advice.</p>
+            </div>
+            <div class="card">
+                <img src="placeholder-doctor.jpg" alt="Doctor consultation illustration" width="260">
+                <h3>Doctor Consultation</h3>
+                <p>Connect with doctors online for expert advice and virtual care.</p>
+            </div>
+            <div class="card">
+                <img src="placeholder-tips.jpg" alt="Health tips illustration" width="260">
+                <h3>Daily Health Tips</h3>
+                <p>Receive daily tips to improve your fitness, diet, and mental wellness.</p>
+            </div>
+        </div>
+
+        <div class="track-form" id="track">
+            <h2>Track Your Health</h2>
+            <label for="cholesterol">Cholesterol Level (mg/dL):</label>
+            <input type="number" id="cholesterol" placeholder="Enter cholesterol level">
+            <label for="weight">Weight (kg):</label>
+            <input type="number" id="weight" placeholder="Enter weight">
+            <label for="bloodPressure">Blood Pressure (mmHg):</label>
+            <input type="text" id="bloodPressure" placeholder="Enter blood pressure (e.g., 120/80)">
+            <button onclick="trackHealth()">Submit</button>
+            <p id="trackResult"></p>
+        </div>
+
+        <div class="tips-section" id="tips">
+            <h2>Daily Health Tips</h2>
+            <div class="tip">
+                <img src="placeholder-water.jpg" alt="Water intake illustration" width="50">
+                <div>
+                    <h4>Stay Hydrated</h4>
+                    <p>Drink at least 8 glasses of water daily to keep your body functioning optimally.</p>
+                </div>
+            </div>
+            <div class="tip">
+                <img src="placeholder-diet.jpg" alt="Healthy diet illustration" width="50">
+                <div>
+                    <h4>Low-Cholesterol Diet</h4>
+                    <p>Incorporate oats, nuts, and fruits to reduce bad cholesterol levels naturally.</p>
+                </div>
+            </div>
+            <div class="tip">
+                <img src="C:\Users\WINDOWS 10\Downloads\yoga.jpg" alt="Exercise illustration" width="50">
+                <div>
+                    <h4>Exercise Regularly</h4>
+                    <p>Aim for 30 minutes of moderate exercise, like walking or yoga, most days of the week.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>© 2025 Healthify. All rights reserved.</p>
+    </div>
+
+    <script>
+        function trackHealth() {
+            const cholesterol = document.getElementById('cholesterol').value;
+            const weight = document.getElementById('weight').value;
+            const bloodPressure = document.getElementById('bloodPressure').value;
+            const result = document.getElementById('trackResult');
+
+            if (cholesterol && weight && bloodPressure) {
+                result.innerHTML = `Health Data Recorded: Cholesterol: ${cholesterol} mg/dL, Weight: ${weight} kg, Blood Pressure: ${bloodPressure} mmHg`;
+                result.style.color = '#2c6e49';
+            } else {
+                result.innerHTML = 'Please fill in all fields.';
+                result.style.color = '#d9534f';
+            }
+        }
+
+        // Smooth scroll for nav links
+        document.querySelectorAll('.nav-links a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                const targetElement = document.getElementById(targetId);
+                targetElement.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+    </script>
+</body>
+</html>
